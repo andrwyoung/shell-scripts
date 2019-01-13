@@ -1,0 +1,27 @@
+#!/bin/bash
+# pull - make copy of executable from /usr/local/bin
+
+# check for correct number of arguments
+if [ $# -eq 0 ]; then
+	echo "usage: $0 executable...."
+	exit 1
+fi	
+
+if [ "$1" = '-a' ]; then
+	cp /usr/local/bin/* ./
+	exit 0;
+fi
+
+for i in $*; do
+	tmp="/usr/local/bin/$i"
+	if [[ -f $tmp && -x $tmp ]]; then
+		if [ -f $i ]; then
+			echo "both $tmp and ./$i exist" 
+		else
+			cp $tmp ./$i
+			vi $i
+		fi
+	else 
+		echo "no executable $tmp"
+	fi
+done

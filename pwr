@@ -1,0 +1,20 @@
+#!/bin/bash
+#pwr - displays charge, energy and battery health
+#not sure what difference between charge and energy was though
+
+#all my variables
+dir=/sys/class/power_supply/sbs-20-000b
+cnow=`cat $dir/charge_now`
+cfull=`cat $dir/charge_full`
+cfulld=`cat $dir/charge_full_design`
+enow=`cat $dir/energy_now`
+efull=`cat $dir/energy_full`
+efulld=`cat $dir/energy_full_design`
+
+# doing calcultations
+cpert=$((cnow*100/cfull))
+epert=$((enow*100/efull))
+chth=$((cfull*100/cfulld))
+ehth=$((efull*100/efulld))
+
+echo "$cpert $epert $ehth"

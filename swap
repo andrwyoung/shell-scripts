@@ -1,0 +1,15 @@
+#!/bin/bash
+# shambles - swaps locations with whatever is in $bp
+
+[ "$_" = "$0" ] && { echo "source please"; exit 1; }
+
+if [ $# -eq "0" ]; then
+	prev=`pwd`
+	cd $bp || return 1 
+	bp="$prev"
+	ls
+elif [ "$1" = "-s" ]; then
+	bp=`pwd`
+else
+	echo "usage: $0 [-s | -v]"
+fi	

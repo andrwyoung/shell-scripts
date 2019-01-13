@@ -1,0 +1,6 @@
+#!/bin/bash
+#cx - create executable
+
+touch $*
+chmod +x $*
+vi $*

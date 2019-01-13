@@ -1,0 +1,42 @@
+#!/bin/bash 
+# push - pushes executable to /usr/local/bin 
+
+# check arguments
+if [ $# -eq 0 ]; then
+	echo "usage: $0 executable..."
+	exit 1
+fi
+
+for i in $*; do
+	tmp="/usr/local/bin/$i"	
+
+	# does executable exist in .?
+	if [ -f $i -a -x $i ]; then
+		# does executable exist in both . and /usr/local/bin?
+		if [ -f $tmp -a -x $tmp ]; then
+			# are there differences in the files?
+			changes=`diff $tmp $i | head -1`
+			if [ -z "$changes" ]; then 
+				rm $i
+			else
+				ans=""
+				# diff $tmp $i
+				echo -n "changes made to $i: update (y/n)? "
+				read ans
+
+				# if differences are good and user entered yes, then push
+				if [ "$ans" = "y" ]; then
+					sudo mv $i $tmp
+				else
+					echo "not pushing"
+				fi
+			fi
+			
+		else
+			sudo mv $i $tmp
+		fi
+	else
+		echo "no executable ./$i"
+	fi
+done
+

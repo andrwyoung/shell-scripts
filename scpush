@@ -1,0 +1,18 @@
+#!/bin/bash
+# scpush - pushes file to another computer using scp
+
+user=`whoami | head -c5` 
+ip=`ps -ef | grep "$user" | grep -o "ssh [^~]*" | head -1 | awk '{print $2}'`
+echo $ip
+
+if [ $# -lt 2 ]; then
+	echo "usage: $0 username file..."
+	exit 1
+fi
+
+if [ "$ip" = '^]' ]; then
+	echo no active ssh connection
+	exit 1
+else
+	scp -r ${@:2} $1@$ip:Downloads
+fi

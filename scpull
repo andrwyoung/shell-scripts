@@ -1,0 +1,13 @@
+#!/bin/bash
+# scpull - get a file while you're inside an ssh
+
+ip=`who am i | awk -F'(' '{print $2}' | sed 's/)//'`
+#grep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*"`
+
+if [ $# -lt 2 ]; then
+	echo "usage: $0 username file..."
+	exit 1
+fi
+
+scp -r ${@:2} $1@$ip:Downloads
+

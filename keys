@@ -1,0 +1,15 @@
+#!/bin/bash
+# keys - changes keymapping between colemak and us
+
+primary="colemak"
+secondary="us"
+
+current=`localectl | grep Keymap | awk '{print $3}'`
+
+if [ "$current" = "$primary" ]; then
+	localectl set-keymap $secondary
+	echo $secondary
+else
+	localectl set-keymap $primary
+	echo $primary
+fi

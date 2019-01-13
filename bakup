@@ -1,0 +1,8 @@
+#!/bin/bash
+# bakup - zips up /usr/local/bin for safekeeping
+
+dest="/root"
+name="binbak"
+files="/usr/local/bin $*"
+
+tar -czf $dest/$name.tar.gz $files

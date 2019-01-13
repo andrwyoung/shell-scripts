@@ -1,0 +1,5 @@
+#!/bin/bash
+# stat - shows date and time very nicely
+
+pow=`pwr`
+date +"%B(%m) %d, %Y  %I:%M:%S%p  $pow"

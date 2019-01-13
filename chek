@@ -1,0 +1,6 @@
+#!/bin/bash
+# check - just outputs diff for each file
+
+for i in $*; do
+	diff /usr/local/bin/$i $i
+done
