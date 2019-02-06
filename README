@@ -1,19 +1,34 @@
 # shell-scripts
 All my personal bash scripts
 
-cx - creates executable
+
 scpull - scp grab while logged into ssh network back to $HOME/downloads
 scpush - scp push into open ssh network's $HOME/downloads
+
 pull - makes copy of executable from /usr/local/bin
 push - pushes executables to /usr/local/bin
-chek - shows differences with files in /usr/local/bin
-bakup - zips up /usr/local/bin for safekeeping in /root
+chek - shows differences before pushing 
+
+co - initiate sshfs
+dco - disconnect
+
+colors - displays all colors available on terminal
+cx - creates executable
 keys - switches between 2 keyboards
-swap - switch directories
+
+label - label my CS projects
+sch - ssh into school servers
+
 
 
 My computer specific:
-baklite - brightness up and down
+lite - brightness up and down
 pwr - shows power and battery health
 stat - shows date and pwr very nicely
-wifi - creates some folders so DNS works
+share - copies files into share folder 
+
+more on the useless side:
+wifi - initiaties wifi using netctl
+swap - switches between directories
+bakup - zips up some files
+
