@@ -1,0 +1,7 @@
+#!/bin/bash
+# dco - disconnect the mount point
+
+mount="/Users/andrwyoung/Desktop/mnt" 
+
+umount $mount
+rmdir $mount
