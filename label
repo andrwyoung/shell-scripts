@@ -1,7 +1,10 @@
 #!/bin/bash
 
-touch $*
+if [ $# -ne 1 ]; then
+	echo "usage: $0 file"
+	exit 1
+fi
+
 echo "NAME: Andrew Yong
 EMAIL: yong.andrew11@gmail.com
-ID: 604905807" | tee $* > /dev/null
-
+ID: 604905807" | cat - $1 > temp && mv temp $1

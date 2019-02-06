@@ -1,0 +1,42 @@
+#!/bin/bash
+# baklite - increases or decreases backlight
+
+path="/sys/devices/backlight.20/backlight/backlight.20/brightness"
+min=1
+
+# should only take one argument
+if [ "$#" -gt "1" ]; then
+	echo "usage: $0 [+/- brightness]" 1>&2
+fi
+
+# echo the current brightness if no arguments
+if [ "$#" -eq "0" ]; then
+	cat $path
+	exit 1
+fi
+
+
+re='^[1-9][0-9]*$'
+initial=`echo $1 | head -c 1`
+# if + or - in front then decrement/increment
+if [ "$initial" = "-" -o "$initial" = "+" ]; then
+	echo 'adding/subtracting'
+	if [ "$(($(cat $path) + $1))" -gt "255" ]; then
+		echo 255 > $path
+		echo "255 is max" 1>&2
+		exit
+	elif [ "$(($(cat $path) + $1))" -lt "$min" ]; then
+		echo $min > $path
+		echo "$min is min" 1>&2
+		exit
+	else
+		echo $(($(cat $path) + $1)) > $path
+	fi	
+# make sure it's a positive number! 
+elif ! [[ $1 =~ $re ]]; then
+	echo "enter a valid number (no zero)"
+	exit 1
+else
+	echo $1 > $path	
+fi
+

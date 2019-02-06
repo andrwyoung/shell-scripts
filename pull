@@ -19,7 +19,7 @@ for i in $*; do
 			echo "both $tmp and ./$i exist" 
 		else
 			cp $tmp ./$i
-			vi $i
+			vim $i
 		fi
 	else 
 		echo "no executable $tmp"

@@ -3,4 +3,4 @@
 
 touch $*
 chmod +x $*
-vi $*
+vim $*

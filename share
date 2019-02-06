@@ -1,0 +1,5 @@
+#!/bin/bash
+# share - move files to sharing folder (monk's home)
+
+share_folder="/home/monk/"
+cp -r $* $share_folder

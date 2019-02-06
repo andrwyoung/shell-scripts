@@ -4,10 +4,22 @@
 ip=`who am i | awk -F'(' '{print $2}' | sed 's/)//'`
 #grep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*"`
 
-if [ $# -lt 2 ]; then
-	echo "usage: $0 username file..."
-	exit 1
+
+if [ ! -s $host ]; then
+	if [ $# -lt 2 ]; then
+		echo "usage: $0 username file..."
+		exit 1
+	else
+		#${@:2} takes all inputs from 2 onward
+		scp -r ${@:2} $1@$ip:Downloads 
+	fi
+else 
+	if [ $# -eq 0 ]; then
+		echo "host is not blank usage: $0 file..."
+		exit 1
+	else
+		scp -r $@ $host@$ip:Downloads
+	fi
 fi
 
-scp -r ${@:2} $1@$ip:Downloads
 
