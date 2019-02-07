@@ -1,10 +1,22 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]; then
-	echo "usage: $0 file"
+label='NAME: Andrew Yong\nEMAIL: yong.andrew11@gmail.com\nID: 604905807'
+
+if [ $# -eq 0 ]; then
+	echo "usage: $0 file..."
 	exit 1
 fi
 
-echo "NAME: Andrew Yong
-EMAIL: yong.andrew11@gmail.com
-ID: 604905807" | cat - $1 > temp && mv temp $1
+if [ -f temp ]; then
+	echo "a temp file exists"
+	exit 1
+fi
+
+for i in $*; do
+	# new file or append?
+	if [ ! -f $i ]; then
+		echo -e $label > $i
+	else
+		echo -e $label | cat - $i > temp && mv temp $i
+	fi
+done
