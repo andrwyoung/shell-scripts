@@ -1,27 +1,38 @@
 #!/bin/bash
 # co - mounts monk@$ip home directory to my desktop
 
-mount="/Users/andrwyoung/Desktop/mnt" 
-user="monk"
-
-# make mound point if not already there
-if [ ! -d $mount ]; then
-	echo making directory
-	mkdir $mount
+#error checking and set up
+if [ $# -eq 0 ]; then
+	echo "usage: $0 username"
+	exit 1
 fi
 
-# make sure it's empty
-if [ ! -z "$(ls -A $mount)" ]; then 
-	echo "there are items already in $mount"
+# make sure there is ip to connect to
+if [ -s $ip ]; then
+	echo variable ip is empty 
 	exit 1
-else
-	echo connecting....
-	# make sure there is ip to connect to
-	if [ -s $ip ]; then
-		echo variable ip is empty
+fi
+
+
+for i in $*; do
+	user="$i"
+	mount="$HOME/Desktop/mnt_$user"
+	# make sure mount point is good
+	if [ -d $mount ]; then 
+		echo "mount point already exists"
 		exit 1
 	else
-		sshfs $user@$ip:/home/$user $mount
-	fi	
+		mkdir $mount
+		echo connecting....
+		sshfs $user@$ip:/home/$user $mount 2> /dev/null	
+	fi
+
+	# if failed to connect, exit
+	if [ $? -ne 0 ]; then
+	rmdir $mount
+	echo "sshfs failed"
+	exit 1
 fi
+done
+
 

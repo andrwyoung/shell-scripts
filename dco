@@ -1,7 +1,21 @@
 #!/bin/bash
 # dco - disconnect the mount point
 
-mount="/Users/andrwyoung/Desktop/mnt" 
+# assuming all mounts go onto the Desktop
+mountpoint="$HOME/Desktop"
 
-umount $mount
-rmdir $mount
+# if no arguments, just umount everything
+regex='^mnt'
+if [ $# -eq 0 ]; then
+	for i in $mountpoint/*; do
+		if [[ `basename $i` =~ $regex ]]; then
+			umount $i && rmdir $i
+		fi
+	done
+fi
+
+for i in $*; do
+	mount="$mountpoint/mnt_$i"
+	umount $mount && rmdir $mount
+done
+
