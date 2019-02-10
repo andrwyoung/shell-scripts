@@ -29,10 +29,10 @@ for i in $*; do
 
 	# if failed to connect, exit
 	if [ $? -ne 0 ]; then
-	rmdir $mount
-	echo "sshfs failed"
-	exit 1
-fi
+		rmdir $mount
+		echo "sshfs failed"
+		exit 1
+	fi
 done
 
 

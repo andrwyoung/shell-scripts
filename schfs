@@ -1,0 +1,20 @@
+#!/bin/bash 
+# schfs - sshfs into lnxsrv09
+
+user="classkwz"
+mount="$HOME/Desktop/mnt_$user"
+
+# make sure mount point is good
+if [ -d $mount ]; then
+	echo "mount point already exists"
+	exit 1
+else
+	mkdir $mount
+	sshfs $user@lnxsrv09.seas.ucla.edu:/u/eng/class/classkwz/Desktop $mount
+fi
+
+if [ $? -ne 0 ]; then
+	rmdir $mount
+	echo "sshfs failed"
+	exit 1
+fi
