@@ -1,0 +1,19 @@
+#!/bin/bash
+# vbmount - mounts everything to my virtualbox
+# if they're all mounted, then umount everything
+
+mounts=(Desktop Documents Downloads bin)
+
+for i in "${mounts[@]}"; do
+	if [ ! -d ~/$i ]; then
+		echo "$i does not exist"
+		exit 1
+	fi
+
+	if [ ! -z $(ls -A ~/$i) ]; then
+		echo "$i already has stuff inside"
+	else
+		echo "mounting $i"
+		sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) $i ~/$i
+	fi
+done

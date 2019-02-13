@@ -10,7 +10,7 @@ if [ -d $mount ]; then
 	exit 1
 else
 	mkdir $mount
-	sshfs $user@lnxsrv09.seas.ucla.edu:/u/eng/class/classkwz/Desktop $mount
+	sshfs $user@lnxsrv09.seas.ucla.edu:/u/eng/class/classkwz/111 $mount
 fi
 
 if [ $? -ne 0 ]; then

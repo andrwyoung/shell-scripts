@@ -2,15 +2,17 @@
 All my personal bash scripts
 
 
-scpull - scp grab while logged into ssh network back to $HOME/downloads
+scpull - scp grab while logged into ssh network back to local $HOME/downloads
 scpush - scp push into open ssh network's $HOME/downloads
+	remarks: not very useful. rather use sshfs
 
 pull - makes copy of executable from /usr/local/bin
 push - pushes executables to /usr/local/bin
 chek - shows differences before pushing 
+	remarks: not very useful for multiple bins
 
 co - initiate sshfs
-dco - disconnect
+dco - disconnect sshfs
 
 colors - displays all colors available on terminal
 cx - creates executable
@@ -18,7 +20,10 @@ keys - switches between 2 keyboards
 
 label - label my CS projects
 sch - ssh into school servers
+schfs - co into school servers
 
+vbmount - mounts all stuff onto virtualbox
+vbumount - umounts all the stuff
 
 
 My computer specific:
