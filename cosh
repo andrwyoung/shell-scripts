@@ -1,0 +1,18 @@
+#!/bin/bash
+# cosh - sshfs and ssh into one username
+
+#error checking and set up
+if [ $# -ne 1 ]; then
+	echo "usage: $0 username"
+	exit 1
+fi
+
+# make sure there is ip to connect to
+if [ -s $ip ]; then
+	echo variable ip is empty 
+	exit 1
+fi
+
+co $1
+ssh $1@$ip
+	
