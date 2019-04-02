@@ -1,0 +1,5 @@
+#!/bin/bash
+# cosh - sshfs and ssh into one username
+
+co $1 && ssh $1@$ip
+	

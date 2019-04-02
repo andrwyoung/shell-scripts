@@ -2,27 +2,38 @@
 All my personal bash scripts
 
 
-scpull - scp grab while logged into ssh network back to $HOME/downloads
-scpush - scp push into open ssh network's $HOME/downloads
-
 pull - makes copy of executable from /usr/local/bin
 push - pushes executables to /usr/local/bin
 chek - shows differences before pushing 
+	remarks: not very useful for multiple bins
 
 co - initiate sshfs
-dco - disconnect
+	empty variables
+dco - disconnect sshfs
+	basename
 
 colors - displays all colors available on terminal
 cx - creates executable
 keys - switches between 2 keyboards
+	localectl
 
 label - label my CS projects
 sch - ssh into school servers
+schfs - co into school servers
+
+
+vbmount - mounts all stuff onto virtualbox
+vbumount - umounts all the stuff
+
+scpull - scp grab while logged into ssh network back to local $HOME/downloads
+scpush - scp push into open ssh network's $HOME/downloads
+	remarks: not very useful. rather use sshfs
 
 
 
 My computer specific:
 lite - brightness up and down
+	regex
 pwr - shows power and battery health
 stat - shows date and pwr very nicely
 share - copies files into share folder 

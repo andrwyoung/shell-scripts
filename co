@@ -3,7 +3,7 @@
 
 #error checking and set up
 if [ $# -eq 0 ]; then
-	echo "usage: $0 username"
+	echo "usage: $0 username..."
 	exit 1
 fi
 
@@ -29,10 +29,10 @@ for i in $*; do
 
 	# if failed to connect, exit
 	if [ $? -ne 0 ]; then
-	rmdir $mount
-	echo "sshfs failed"
-	exit 1
-fi
+		rmdir $mount
+		echo "sshfs failed"
+		exit 1
+	fi
 done
 
 
