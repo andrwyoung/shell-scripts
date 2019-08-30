@@ -1,0 +1,4 @@
+#!/bin/bash
+
+path=$(dirname "$0")
+$path/.bible/bible.py Proverbs

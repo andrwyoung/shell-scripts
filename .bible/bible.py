@@ -3,11 +3,14 @@
 import json
 import sys
 import random
+import os
 from pathlib import Path
 
 # file location and error message
-home = str(Path.home())
-file = home + "/.bin/esv.js"
+#import subprocess
+#subprocess.run(["pwd"])
+path = os.path.dirname(os.path.abspath(__file__))
+file = path + "/esv.js"
 usage = "usage: bible [book] [chapter] [verse]"
 
 # import data
