@@ -1,6 +1,8 @@
 # shell-scripts
 All my personal bash scripts
 
+./bible/bible.py - bible verse parser. random verse of specified verse
+	using it mainly for proverbs MOTD
 
 pull - makes copy of executable from /usr/local/bin
 push - pushes executables to /usr/local/bin
