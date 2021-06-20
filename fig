@@ -9,6 +9,7 @@ pick_photo () {
 }
 
 
+
 FILE=_directory.txt
 if [ "$1" = '-c' ]; then
 	echo "creating $FILE"
@@ -16,25 +17,37 @@ if [ "$1" = '-c' ]; then
 	exit 0
 fi
 
-if test -f "$FILE"; then
-	:
-else
+# checking if _directory.txt exists
+# saves some work as well as a good double check
+if ! [[ -s "$FILE" ]]; then
     echo "ERROR: $FILE doesn't exist, use -c option to generate" >&2
     exit 1
 fi
 
-# note that -c will exit, so won't get in way
+# if a number is inputted, then it's a timed loop
 if [ $# -eq 0 ]; then
 	pick_photo
 else
+	# checking if number
 	re='^[0-9]+$'
 	if ! [[ $1 =~ $re ]] ; then
    		echo "ERROR: not a number" >&2
    		exit 1
 	fi
 
-	SEC="$(($1 * 60))"
+	# less than 10 seconds too fast
+	if [ $1 -le 10 ] ; then
+   		echo "ERROR: please pick number bigger than 10" >&2
+   		exit 1
+	fi
+
+	SEC=$1
 	echo "looping every $SEC seconds"
+
+	while true; do
+		pick_photo
+		sleep $SEC
+	done
 fi
 
 
