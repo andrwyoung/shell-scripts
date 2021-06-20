@@ -1,7 +1,7 @@
 #!/bin/bash 
 # schfs - sshfs into lnxsrv09
 
-user="classkwz"
+user="classyon"
 mount="$HOME/Desktop/mnt_$user"
 
 # make sure mount point is good
@@ -10,7 +10,7 @@ if [ -d $mount ]; then
 	exit 1
 else
 	mkdir $mount
-	sshfs $user@lnxsrv09.seas.ucla.edu:/u/eng/class/classkwz/111 $mount
+	sshfs $user@lnxsrv09.seas.ucla.edu:/u/eng/class/$user/Desktop $mount
 fi
 
 if [ $? -ne 0 ]; then

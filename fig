@@ -1,0 +1,41 @@
+#!/bin/bash
+#fig - open random jpeg from a directory (for figure drawing)
+
+pick_photo () {
+	PHOTO=`cat $FILE | sort -R | head -1`
+	echo "open $PHOTO"
+
+	open $PHOTO
+}
+
+
+FILE=_directory.txt
+if [ "$1" = '-c' ]; then
+	echo "creating $FILE"
+	find . | grep '\.jpg' > $FILE
+	exit 0
+fi
+
+if test -f "$FILE"; then
+	:
+else
+    echo "ERROR: $FILE doesn't exist, use -c option to generate" >&2
+    exit 1
+fi
+
+# note that -c will exit, so won't get in way
+if [ $# -eq 0 ]; then
+	pick_photo
+else
+	re='^[0-9]+$'
+	if ! [[ $1 =~ $re ]] ; then
+   		echo "ERROR: not a number" >&2
+   		exit 1
+	fi
+
+	SEC="$(($1 * 60))"
+	echo "looping every $SEC seconds"
+fi
+
+
+
