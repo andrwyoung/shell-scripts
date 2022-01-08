@@ -1,5 +1,6 @@
 #!/bin/bash
-#fig - open random jpeg from a directory (for figure drawing)
+#fig - open random jpeg from a directory (for figure drawing) 
+# has timed options!
 
 pick_photo () {
 	PHOTO=`cat $FILE | sort -R | head -1`
@@ -8,14 +9,30 @@ pick_photo () {
 	open $PHOTO
 }
 
+create_directory () {
+	echo "creating $FILE"
+	find . | grep '\.jpg' > $FILE
+	exit 0
+}
+
 
 
 FILE=_directory.txt
 if [ "$1" = '-c' ]; then
-	echo "creating $FILE"
-	find . | grep '\.jpg' > $FILE
-	exit 0
+	create_directory
 fi
+
+
+if [ "$1" = '-r' ]; then
+	a=1
+	for i in *.jpg *.JPG; do
+	  new=$(printf "%04d.jpg" "$a") #04 pad to length of 4
+	  mv -i -- "$i" "$new"
+	  let a=a+1
+	done
+	create_directory
+fi
+
 
 # checking if _directory.txt exists
 # saves some work as well as a good double check
