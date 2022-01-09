@@ -1,0 +1,47 @@
+#!/bin/bash
+
+
+hours=0
+minutes=0
+seconds=0
+IFS=':' #setting colon as delimiter  
+
+for i in "$@"; do
+	read -a strarr <<< "$i"
+	if [ ${#strarr[*]} -ne 3 ] 
+	then
+		echo "each time entry must be in format 00:00:00"
+		exit 1
+	fi
+
+	if (( strarr[1] >= 60 ))
+	then
+		echo "minutes must be less than 60"
+		exit 1
+	fi
+
+	if (( strarr[2] >= 60 ))
+	then
+		echo "seconds must be less than 60"
+		exit 1
+	fi
+
+	# echo "${strarr[0]}" 
+	hours=$((hours + strarr[0]))
+
+	# echo "${strarr[1]}"  
+	new_mins=$((minutes + strarr[1]))
+	minutes=$((new_mins % 60))
+	hours=$((hours + new_mins / 60))
+
+	# echo "${strarr[2]}" 
+	new_sec=$((seconds + strarr[2]))
+	seconds=$((new_sec % 60))
+	minutes=$((minutes + new_sec / 60))
+
+done
+
+
+echo "$hours:$minutes:$seconds"
+echo $hours "+" $minutes "/ 60 +" $seconds "/ 3600" | bc -l
+
